@@ -52,7 +52,8 @@ call plug#end()
 
 set bg=dark
 set hlsearch "Always highlight the search matches"
-set backspace=indent,eol,start
+"set backspace=indent,eol,start
+set backspace=eol,start
 set guifont=DejaVu\ Sans:s12
 set mouse=a "Enable mouse support for vim
 set ignorecase "set search to not be case-sensitive
