@@ -52,15 +52,21 @@ call plug#end()
 
 set bg=dark
 set hlsearch "Always highlight the search matches"
-"set backspace=indent,eol,start
-set backspace=eol,start
-set guifont=DejaVu\ Sans:s12
+set backspace=indent,eol,start "allow backspacing over everything in insert mode (including automatically inserted indentation, line breaks and start of insert)
 set mouse=a "Enable mouse support for vim
 set ignorecase "set search to not be case-sensitive
-"set incsearch "show partial matches when searching
+set incsearch "show partial matches when searching
 set belloff=all "disable 'error' sound effect"
 set foldmethod=indent "Lines with the same indent level will be collapled: toggle with <za>(single level), <zA>(includinngn sublevels)
-
+set number "Enable line numbering
+set nosmarttab
+set cindent
+set tabstop=4 "Number of spaces a <TAB> counts for"
+set shiftwidth=2
+set expandtab "always uses spaces instead of tab characters
+set laststatus=2
+set statusline+=%F  
+    
 
 nmap <leader>n :NERDTreeFocus<CR>
 nmap <C-n> :NERDTreeToggle<CR>
@@ -74,8 +80,6 @@ noremap <Leader>p "+p
 vmap <Leader>y "+y
 vmap <Leader>p "+p
 nnoremap <leader>r @:
-
-
 
 
 nnoremap - <C-w><
@@ -92,11 +96,7 @@ nnoremap <Leader>t :tabs<CR>
 let g:NERDTreeGitStatusWithFlags = 1
 let g:airline_theme='gruvbox'
 colorscheme gruvbox
-"let g:dracula_italic = 0
-"packadd! dracula
 "syntax enable
-"colorscheme dracula
-"colorscheme github_dark 
 highlight Normal ctermbg=None
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
@@ -107,9 +107,6 @@ let mapleader = ","
 let g:mapleader = ","
 
 
-"source ~/.vim/plugin/matchit.vim
-
-set number
 
 let g:airline_theme='dark'
 let g:airline_powerline_fonts = 1
@@ -146,15 +143,6 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
-
-set smarttab
-set cindent
-set tabstop=2
-set shiftwidth=2
-" always uses spaces instead of tab characters
-set expandtab
-set laststatus=2
-set statusline+=%F  
 
 " sync open file with NERDTree
 " " Check if NERDTree is open or active
@@ -284,8 +272,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
@@ -314,4 +300,3 @@ vnoremap <Esc>tC :call nerdcommenter#Comment(0, "toggle")<CR>
 
 nnoremap <D-/> :call NERDComment(0, "toggle")<CR>
 vnoremap <D-/> :call nerdcommenter#Comment(0, "toggle")<CR>
-
