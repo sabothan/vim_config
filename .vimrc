@@ -3,7 +3,7 @@ call plug#begin('~/.vim/plugged')
   "Custom popup menu with snippet support
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-  " NERDTree (navigation sidebar"
+  " NERDTree (navigation sidebar)
   Plug 'scrooloose/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -37,17 +37,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline-themes' 
   
   " TypeScript syntax highlithing"
-  Plug 'HerringtonDarkholme/yats.vim' 
+  "Plug 'HerringtonDarkholme/yats.vim' 
 
   " React syntax highlighting and indenting plugin for vim. Also supports the typescript tsx file.
-  Plug 'maxmellon/vim-jsx-pretty'
+  "Plug 'maxmellon/vim-jsx-pretty'
 
   " This plugin provides extended matching for the % operator.
-  "Plug 'https://github.com/adelarsq/vim-matchit'
   Plug 'adelarsq/vim-matchit'
-
-  " Github themes for neovim
-  "Plug 'projekt0n/github-nvim-theme', { 'tag': 'v0.0.7' }
 call plug#end()
 
 set bg=dark
@@ -93,6 +89,7 @@ nnoremap <Leader>w+ :vertical resize +5<CR>
 nnoremap <Leader>w- :vertical resize -5<CR>
 nnoremap <Leader>t :tabs<CR>
 
+let NERDTreeShowHidden=1 "Always show hidden files within NERDTree"
 let g:NERDTreeGitStatusWithFlags = 1
 let g:airline_theme='gruvbox'
 colorscheme gruvbox
@@ -103,25 +100,13 @@ let g:airline#extensions#tabline#formatter = 'default'
 "let g:vim_jsx_pretty_colorful_config = 1
 
 
+" Specify <Leader> key
 let mapleader = ","
 let g:mapleader = ","
 
 
-
 let g:airline_theme='dark'
-let g:airline_powerline_fonts = 1
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-"let g:NERDTreeGitStatusNodeColorization = 1
-"let g:NERDTreeColorMapCustom = {
-    "\ "Staged"    : "#0ee375",  
-    "\ "Modified"  : "#d9bf91",  
-    "\ "Renamed"   : "#51C9FC",  
-    "\ "Untracked" : "#FCE77C",  
-    "\ "Unmerged"  : "#FC51E6",  
-    "\ "Dirty"     : "#FFBD61",  
-    "\ "Clean"     : "#87939A",   
-    "\ "Ignored"   : "#808080",    
-"\}                         
+let g:airline_powerline_fonts = 1                  
 
 
 let g:NERDTreeIgnore = ['^node_modules$']
