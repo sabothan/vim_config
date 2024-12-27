@@ -7,7 +7,7 @@ call plug#begin('~/.vim/plugged')
 
   " NERDTree (navigation sidebar)
   Plug 'scrooloose/nerdtree'
-  Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
   " Custom icons for vim plugins (e.g. NERDTree) 
@@ -61,10 +61,9 @@ set ignorecase "set search to not be case-sensitive
 set incsearch "show partial matches when searching
 set belloff=all "disable 'error' sound effect"
 set foldmethod=indent "Lines with the same indent level will be collapled: toggle with <za>(single level), <zA>(includinngn sublevels)
-set nosmarttab 
-set cindent
+set nocindent
 set tabstop=4 "Number of spaces a <TAB> counts for"
-set shiftwidth=2
+set shiftwidth=4
 set expandtab "always uses spaces instead of tab characters
 
 " Map 'yank' and 'paste' to PRIMARY(*, copy-on-select, paste with middle mouse), CLIPBOARD(*, copy with ^+c, paste with ^+v)"
@@ -112,6 +111,7 @@ set number "Enable line numbering
 set hlsearch "Always highlight the search matches"
 set laststatus=2 "last window will always have a status line"
 set statusline+=%F "define content of status line"
+set cursorline " Highlight the current line
 syntax on "Enable syntax highlighting"
 highlight Normal ctermbg=None
 
@@ -211,7 +211,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " GoTo code navigation
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gD <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
@@ -320,3 +320,7 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" Option to toggle the visibility of inlay hints (descriptions of the
+" argumants in a function e.g. foo(arg1: 'hello'):
+nnoremap <leader>hint :CocCommand document.toggleInlayHint<CR>
