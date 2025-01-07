@@ -75,11 +75,46 @@ Download the [release](https://raw.githubusercontent.com/junegunn/vim-plug/maste
 
 After placing `vim-plug` in the right location restart VIM and run the command `<:PlugInstall>` to install the plugings specified in the vimrc file.
 
-One of the used plugins requires some extra steps. Simply execute the following VIM commands:
+### Conquer of Completion 
+
+Conquer of Completion (CoC) requires some extra steps. Simply execute the following VIM commands:
 1. `<:CocInstall coc-pyright>` to install Python IntelliSense
 2. `<:CocInstall coc-snippets>` to install CoC Snippet support
 3. `<:CocInstall coc-snippets coc-word` to install snippet support's word completion
+4. `<:CocInstall coc-jedi>` for additional Python support
 
+At last you need to make one change to the `coc-settings.json` file.
+Enter this file by executing `<:CocConfig>`.
 
-> done
+Now a new window should pop up. 
+Here you need to add the following line to the JSON object: `"inlayHint.display": false`
 
+In total it could look like:
+```bash
+{
+    "snippets.ultisnips.pythonPrompt": false,
+    "inlayHint.display": false
+}
+```
+
+## Handling of temporary files
+
+VIM generates e.g. `swp` files while you are editing.
+These ensure that if a crash occurs you can restore your file and they provide the opportunity for different users to simultaneously work on the same file.
+Those swap files are by default generated in your working directory.
+
+I however find that a bit annoying.
+It is possible to set a temporary directory for VIMs swap files etc.
+
+First few lines in the provided `.vimrc` file specify the directories to use for such cases:
+```
+set backupdir=$TEMPDIR//
+set directory=$TEMPDIR//
+```
+
+But for it to work you need to first define the correct value of `$TEMPDIR` within your shell configuration file:
+For example, if you are using `zsh` add the following line to your `~/.zshrc` file:
+```bash
+export TEMPDIR=~/.vimrc/temp
+```
+Reload your terminal and voila!
