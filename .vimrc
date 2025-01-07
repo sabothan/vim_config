@@ -1,4 +1,10 @@
 "-------------------------------------------------------------------------------
+" Configure the handling of VIMs temporary and swap files
+"-------------------------------------------------------------------------------
+set backupdir=$TEMPDIR//
+set directory=$TEMPDIR//
+
+"-------------------------------------------------------------------------------
 " Plugins
 "-------------------------------------------------------------------------------
 call plug#begin('~/.vim/plugged')
@@ -7,7 +13,7 @@ call plug#begin('~/.vim/plugged')
 
   " NERDTree (navigation sidebar)
   Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
   " Custom icons for vim plugins (e.g. NERDTree) 
