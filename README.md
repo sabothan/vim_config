@@ -115,6 +115,7 @@ set directory=$TEMPDIR//
 But for it to work you need to first define the correct value of `$TEMPDIR` within your shell configuration file:
 For example, if you are using `zsh` add the following line to your `~/.zshrc` file:
 ```bash
-export TEMPDIR=~/.vimrc/temp
+export TEMPDIR=~/.vim/temp
 ```
-Reload your terminal and voila!
+Reload your terminal and voila!   
+**Note**: Check if this directory exists, if not you will need to create it with e.g. `mkdir ~/.vim/temp`
