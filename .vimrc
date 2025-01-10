@@ -51,7 +51,7 @@ call plug#begin('~/.vim/plugged')
   "Plug 'maxmellon/vim-jsx-pretty'
   
   " This plugin provides extended matching for the % operator.
-  Plug 'adelarsq/vim-matchit'
+  "Plug 'adelarsq/vim-matchit'
 call plug#end()
 
 "-------------------------------------------------------------------------------
@@ -67,10 +67,17 @@ set ignorecase "set search to not be case-sensitive
 set incsearch "show partial matches when searching
 set belloff=all "disable 'error' sound effect"
 set foldmethod=indent "Lines with the same indent level will be collapled: toggle with <za>(single level), <zA>(includinngn sublevels)
-set nocindent
+
+set nocompatible
+filetype plugin indent off
+"set nocindent
 set tabstop=4 "Number of spaces a <TAB> counts for"
 set shiftwidth=4
-set expandtab "always uses spaces instead of tab characters
+"set expandtab "always uses spaces instead of tab characters
+set smartindent 
+
+" Disable VIMs default Python indentation logic
+let g:python_recommend_style = 0
 
 " Map 'yank' and 'paste' to PRIMARY(*, copy-on-select, paste with middle mouse), CLIPBOARD(*, copy with ^+c, paste with ^+v)"
 noremap <Leader>y "+y
