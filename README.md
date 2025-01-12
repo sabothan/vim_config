@@ -93,7 +93,11 @@ In total it could look like:
 ```bash
 {
     "snippets.ultisnips.pythonPrompt": false,
-    "inlayHint.display": false
+    "inlayHint.display": false,
+    "editor.tabSize: 4,
+    "editor.insertSpaces": true,
+    "python.formatting.provider": "black",
+    "python.formatting.autopep8Args": ["--indent-size=4"]
 }
 ```
 
