@@ -73,7 +73,7 @@ filetype plugin indent off
 "set nocindent
 set tabstop=4 "Number of spaces a <TAB> counts for"
 set shiftwidth=4
-"set expandtab "always uses spaces instead of tab characters
+set expandtab "always uses spaces instead of tab characters
 set smartindent 
 
 " Disable VIMs default Python indentation logic
