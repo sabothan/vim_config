@@ -29,14 +29,6 @@ call plug#begin('~/.vim/plugged')
   " a menu. These operations are available for most filetypes.
   Plug 'scrooloose/nerdcommenter' 
 
-  " Provides mappings to move between vim panes and tmux splits "
-  Plug 'christoomey/vim-tmux-navigator'
-    "<ctrl-h> - Left
-    "<ctrh-j> - Down
-    "<ctrl-k> - Up
-    "<ctrl-l> - Right
-    "<ctrl-\> - Previous split
-
   " Color scheme for vim 
   Plug 'morhetz/gruvbox'
 
@@ -44,15 +36,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline' 
   Plug 'vim-airline/vim-airline-themes' 
   
-  " TypeScript syntax highlithing"
-  "Plug 'HerringtonDarkholme/yats.vim' 
-
-  " React syntax highlighting and indenting plugin for vim. Also supports the typescript tsx file.
-  "Plug 'maxmellon/vim-jsx-pretty'
-  
   " This plugin provides extended matching for the % operator.
-  "Plug 'adelarsq/vim-matchit'
+  Plug 'adelarsq/vim-matchit'
 call plug#end()
+
 
 "-------------------------------------------------------------------------------
 " General
@@ -67,17 +54,10 @@ set ignorecase "set search to not be case-sensitive
 set incsearch "show partial matches when searching
 set belloff=all "disable 'error' sound effect"
 set foldmethod=indent "Lines with the same indent level will be collapled: toggle with <za>(single level), <zA>(includinngn sublevels)
-
-set nocompatible
-filetype plugin indent off
-"set nocindent
+set nocindent
 set tabstop=4 "Number of spaces a <TAB> counts for"
 set shiftwidth=4
 set expandtab "always uses spaces instead of tab characters
-set smartindent 
-
-" Disable VIMs default Python indentation logic
-let g:python_recommend_style = 0
 
 " Map 'yank' and 'paste' to PRIMARY(*, copy-on-select, paste with middle mouse), CLIPBOARD(*, copy with ^+c, paste with ^+v)"
 noremap <Leader>y "+y
@@ -182,11 +162,17 @@ vnoremap <Esc>tC :call nerdcommenter#Comment(0, "toggle")<CR>
 nnoremap <D-/> :call NERDComment(0, "toggle")<CR>
 vnoremap <D-/> :call nerdcommenter#Comment(0, "toggle")<CR>
 
+"-------------------------------------------------------------------------------
+" GitGutter
+"-------------------------------------------------------------------------------
+" To ensure that signs are always up-to-date, you can set up an autocmd  
+" to refresh vim-gitgutter whenever the file is saved or the buffer changes
+autocmd BufWritePost,TextChanged,TextChangedI * GitGutter
+
 
 "-------------------------------------------------------------------------------
 " Conquer of Completion: CoC
 "-------------------------------------------------------------------------------
-" https://raw.githubusercontent.com/neoclide/coc.nvim/master/doc/coc-example-config.vim
 
 " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count utf-8 byte sequence
 set encoding=utf-8
@@ -216,10 +202,11 @@ function! CheckBackspace() abort
 endfunction
 let g:coc_snippet_next = '<tab>'
 
-" Use `[g` and `]g` to navigate diagnostics
+" Use `ge` and `gE` to navigate diagnostic errors
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" Checkout <:h coc-config-diagnostics> for further info
+nmap <silent> ge <Plug>(coc-diagnostic-next-error)
+nmap <silent> gE <Plug>(coc-diagnostic-prev-error)
 
 " GoTo code navigation
 nmap <silent> gd <Plug>(coc-definition)
@@ -287,14 +274,17 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
-" Remap <C-f> and <C-b> to scroll float windows/popups
+" Remap <C-j> and <C-k> to scroll float windows/popups
 if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  " Scroll down in CoC popup window
+  nnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"
+  inoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? "\<C-r>=coc#float#scroll(1)\<CR>" : "\<Down>"
+  vnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"
+
+  " Scroll up in CoC popup window
+  nnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"
+  inoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? "\<C-r>=coc#float#scroll(0)\<CR>" : "\<Up>"
+  vnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"
 endif
 
 " Use CTRL-S for selections ranges
