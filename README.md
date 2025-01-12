@@ -97,7 +97,8 @@ In total it could look like:
     "editor.tabSize: 4,
     "editor.insertSpaces": true,
     "python.formatting.provider": "black",
-    "python.formatting.autopep8Args": ["--indent-size=4"]
+    "python.formatting.autopep8Args": ["--indent-size=4"],
+    "diagnostic.checkCurrentLine": "true"
 }
 ```
 
