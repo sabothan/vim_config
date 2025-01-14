@@ -137,6 +137,8 @@ let NERDTreeShowHidden=1 "Always show hidden files within NERDTree"
 let g:NERDTreeGitStatusWithFlags = 1
 let g:NERDTreeIgnore = ['^node_modules$']
 
+" Automatically refresh NERDTree when focusing to the window
+autocmd BufEnter NERD_tree_* | execute 'normal R'
 
 " sync open file with NERDTree
 " Check if NERDTree is open or active
