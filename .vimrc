@@ -30,7 +30,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdcommenter' 
     
     " Color scheme for vim 
-    Plug 'morhetz/gruvbox'
+    "Plug 'morhetz/gruvbox'
+    Plug 'tomasiser/vim-code-dark'
     
     " Display a status line at the bottom of each vim window
     Plug 'vim-airline/vim-airline' 
@@ -99,7 +100,9 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 " Appearance, window, format, ...
 "-------------------------------------------------------------------------------
 set bg=dark "Set background color"
-colorscheme gruvbox "set gruvbox as color scheme"
+set t_Co=256
+set t_ut=
+colorscheme codedark
 set number "Enable line numbering
 set hlsearch "Always highlight the search matches"
 set laststatus=2 "last window will always have a status line"
@@ -119,7 +122,7 @@ nnoremap <Leader>w- :vertical resize -5<CR>
 " vim-airline
 "-------------------------------------------------------------------------------
 "let g:airline_theme='dark'
-let g:airline_theme='gruvbox'
+let g:airline_theme='codedark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline_powerline_fonts = 1                  
