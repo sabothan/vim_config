@@ -8,37 +8,36 @@ set directory=$TEMPDIR//
 " Plugins
 "-------------------------------------------------------------------------------
 call plug#begin('~/.vim/plugged')
-    "Custom popup menu with snippet support
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    
-    " NERDTree (navigation sidebar)
-    Plug 'scrooloose/nerdtree'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-    
-    " Custom icons for vim plugins (e.g. NERDTree) 
-    Plug 'ryanoasis/vim-devicons'
-    
-    " A Vim plugin which shows a git diff in the sign column. It shows which lines have been added, modified, or removed. 
-    Plug 'airblade/vim-gitgutter'
-    
-    " Full path fuzzy file, buffer, mru, tag, ... finder for Vim.
-    Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
-    
-    " The NERD commenter provides many different commenting operations and styles which are invoked via key mappings and 
-    " a menu. These operations are available for most filetypes.
-    Plug 'scrooloose/nerdcommenter' 
-    
-    " Color scheme for vim 
-    "Plug 'morhetz/gruvbox'
-    Plug 'tomasiser/vim-code-dark'
-    
-    " Display a status line at the bottom of each vim window
-    Plug 'vim-airline/vim-airline' 
-    Plug 'vim-airline/vim-airline-themes' 
-    
-    " This plugin provides extended matching for the % operator.
-    Plug 'adelarsq/vim-matchit'
+  "Custom popup menu with snippet support
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+  " NERDTree (navigation sidebar)
+  Plug 'scrooloose/nerdtree'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+  " Custom icons for vim plugins (e.g. NERDTree) 
+  Plug 'ryanoasis/vim-devicons'
+
+  " A Vim plugin which shows a git diff in the sign column. It shows which lines have been added, modified, or removed. 
+  Plug 'airblade/vim-gitgutter'
+
+  " Full path fuzzy file, buffer, mru, tag, ... finder for Vim.
+  Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
+
+  " The NERD commenter provides many different commenting operations and styles which are invoked via key mappings and 
+  " a menu. These operations are available for most filetypes.
+  Plug 'scrooloose/nerdcommenter' 
+
+  " Color scheme for vim 
+  Plug 'morhetz/gruvbox'
+
+  " Display a status line at the bottom of each vim window
+  Plug 'vim-airline/vim-airline' 
+  Plug 'vim-airline/vim-airline-themes' 
+  
+  " This plugin provides extended matching for the % operator.
+  Plug 'adelarsq/vim-matchit'
 call plug#end()
 
 
@@ -100,9 +99,7 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 " Appearance, window, format, ...
 "-------------------------------------------------------------------------------
 set bg=dark "Set background color"
-set t_Co=256
-set t_ut=
-colorscheme codedark
+colorscheme gruvbox "set gruvbox as color scheme"
 set number "Enable line numbering
 set hlsearch "Always highlight the search matches"
 set laststatus=2 "last window will always have a status line"
@@ -122,7 +119,7 @@ nnoremap <Leader>w- :vertical resize -5<CR>
 " vim-airline
 "-------------------------------------------------------------------------------
 "let g:airline_theme='dark'
-let g:airline_theme='codedark'
+let g:airline_theme='gruvbox'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline_powerline_fonts = 1                  
@@ -195,15 +192,15 @@ set signcolumn=yes
 " NOTE: There's always complete item selected by default, you may want to enable no select by `"suggest.noselect": true` in your configuration file
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin before putting this into your config
 inoremap <silent><expr> <TAB>
-    \ coc#pum#visible() ? coc#_select_confirm() :
-    \ coc#expandableOrJumpable() ?
-    \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-    \ CheckBackspace() ? "\<TAB>" :
-    \ coc#refresh()
+  \ coc#pum#visible() ? coc#_select_confirm() :
+  \ coc#expandableOrJumpable() ?
+  \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+  \ CheckBackspace() ? "\<TAB>" :
+  \ coc#refresh()
 
 function! CheckBackspace() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 let g:coc_snippet_next = '<tab>'
 
@@ -223,11 +220,11 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call ShowDocumentation()<CR>
 
 function! ShowDocumentation()
-    if CocAction('hasProvider', 'hover')
-        call CocActionAsync('doHover')
-    else
-        call feedkeys('K', 'in')
-    endif
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
 endfunction
 
 " Highlight the symbol and its references when holding the cursor
@@ -241,11 +238,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
-    autocmd!
-    " Setup formatexpr specified filetype(s)
-    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-    " Update signature help on jump placeholder
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  autocmd!
+  " Setup formatexpr specified filetype(s)
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying code actions to the selected code block
@@ -281,15 +278,15 @@ omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-j> and <C-k> to scroll float windows/popups
 if has('nvim-0.4.0') || has('patch-8.2.0750')
-    " Scroll down in CoC popup window
-    nnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"
-    inoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? "\<C-r>=coc#float#scroll(1)\<CR>" : "\<Down>"
-    vnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"
-    
-    " Scroll up in CoC popup window
-    nnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"
-    inoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? "\<C-r>=coc#float#scroll(0)\<CR>" : "\<Up>"
-    vnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"
+  " Scroll down in CoC popup window
+  nnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"
+  inoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? "\<C-r>=coc#float#scroll(1)\<CR>" : "\<Down>"
+  vnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"
+
+  " Scroll up in CoC popup window
+  nnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"
+  inoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? "\<C-r>=coc#float#scroll(0)\<CR>" : "\<Up>"
+  vnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"
 endif
 
 " Use CTRL-S for selections ranges
