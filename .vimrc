@@ -94,6 +94,9 @@ inoremap <C-BS> <C-w>
 " faster when scanning large projects:
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
+" Custom command to insert a new line at the current cursor position
+nnoremap <leader>o i<CR><Esc>
+
 
 "-------------------------------------------------------------------------------
 " Appearance, window, format, ...
