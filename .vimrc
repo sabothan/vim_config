@@ -38,6 +38,9 @@ call plug#begin('~/.vim/plugged')
   
   " This plugin provides extended matching for the % operator.
   Plug 'adelarsq/vim-matchit'
+
+  " Plugin to mark merge-conflicts in color
+  Plug 'rhysd/conflict-marker.vim'
 call plug#end()
 
 
@@ -94,7 +97,7 @@ inoremap <C-BS> <C-w>
 " faster when scanning large projects:
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
-" Custom command to insert a new line at the current cursor position
+" Command to insert a new line at the current cursor position
 nnoremap <leader>o i<CR><Esc>
 
 
@@ -116,6 +119,56 @@ nnoremap <Leader>w+ :vertical resize +5<CR>
 
 " Decrease window width by 5 columns
 nnoremap <Leader>w- :vertical resize -5<CR>
+
+
+"-------------------------------------------------------------------------------
+" Highlight Git conflict markers (GitLab-style)
+"
+" conflict-marker.vim default mappings
+"
+" Normal mode (when cursor is inside a conflict block):
+"   co   ‚Üí choose ours      (keep current branch, delete theirs + markers)
+"   ct   ‚Üí choose theirs    (keep incoming branch, delete ours + markers)
+"   cb   ‚Üí choose both      (keep ours + theirs, delete markers)
+"   cB   ‚Üí choose both (ours first)
+"   cn   ‚Üí choose none      (delete everything, leave empty block)
+"
+" Text objects (for operators like d, y, v):
+"   ic   ‚Üí inner conflict   (just the conflicting lines)
+"   ac   ‚Üí a conflict       (whole block including markers)
+"
+" Example: `vic` selects the inner conflict, `dac` deletes the whole block.
+"-------------------------------------------------------------------------------
+
+" Don‚Äôt use default Diff* highlight groups
+let g:conflict_marker_highlight_group = ''
+
+let g:conflict_marker_begin = '^<<<<<<<\+ .*$'
+let g:conflict_marker_common_ancestors = '^|||||||\+ .*$'
+let g:conflict_marker_end   = '^>>>>>>>\+ .*$'
+
+augroup ConflictMarkerHighlights
+  autocmd!
+  autocmd VimEnter,ColorScheme * call s:ConflictMarkerColors()
+augroup END
+
+function! s:ConflictMarkerColors() abort
+  " Conflict marker lines (<<<<<<<, >>>>>>>)
+  highlight ConflictMarkerBegin ctermbg=52  guibg=#6e1e1e guifg=#ffffff
+  highlight ConflictMarkerEnd   ctermbg=52  guibg=#6e1e1e guifg=#ffffff
+
+  " Separator (=======)
+  highlight ConflictMarkerSeparator ctermbg=238 guibg=#444444 guifg=#f0f0f0
+
+  " Our changes (green, like GitLab "ours")
+  highlight ConflictMarkerOurs  ctermbg=22  guibg=#1f4523 guifg=#d1f5d3
+
+  " Their changes (blue, like GitLab "theirs")
+  highlight ConflictMarkerTheirs ctermbg=24 guibg=#1e3f66 guifg=#d3e5f5
+
+  " Common ancestor (neutral gray/purple)
+  highlight ConflictMarkerCommonAncestorsHunk ctermbg=240 guibg=#3f3f3f guifg=#e0e0e0
+endfunction
 
 
 "-------------------------------------------------------------------------------
