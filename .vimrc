@@ -332,17 +332,35 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
-" Remap <C-j> and <C-k> to scroll float windows/popups
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  " Scroll down in CoC popup window
-  nnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"
-  inoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? "\<C-r>=coc#float#scroll(1)\<CR>" : "\<Down>"
-  vnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"
+" Scroll viewport normally; if a CoC float is scrollable, scroll the float instead
+if (has('nvim-0.4.0') || has('patch-8.2.0750')) && exists('*coc#float#has_scroll')
 
-  " Scroll up in CoC popup window
-  nnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"
-  inoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? "\<C-r>=coc#float#scroll(0)\<CR>" : "\<Up>"
-  vnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"
+  " --- Normal mode ---
+  nnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll()
+        \ ? coc#float#scroll(1)
+        \ : "\<C-e>"      " scroll window down one line
+  nnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll()
+        \ ? coc#float#scroll(0)
+        \ : "\<C-y>"      " scroll window up one line
+
+  " --- Visual mode ---
+  " (keeps selection while you scroll the viewport)
+  vnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll()
+        \ ? coc#float#scroll(1)
+        \ : "\<C-e>"
+  vnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll()
+        \ ? coc#float#scroll(0)
+        \ : "\<C-y>"
+
+  " --- Insert mode ---
+  " Use <C-o> to execute one Normal-mode scroll without leaving Insert
+  inoremap <silent><nowait><expr> <C-j> coc#float#has_scroll()
+        \ ? "\<C-r>=coc#float#scroll(1)\<CR>"
+        \ : "\<C-o>\<C-e>"
+  inoremap <silent><nowait><expr> <C-k> coc#float#has_scroll()
+        \ ? "\<C-r>=coc#float#scroll(0)\<CR>"
+        \ : "\<C-o>\<C-y>"
+
 endif
 
 " Use CTRL-S for selections ranges
