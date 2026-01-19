@@ -100,6 +100,11 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 " Command to insert a new line at the current cursor position
 nnoremap <leader>o i<CR><Esc>
 
+" scroll the viewport up and down (without moving the cursor)
+" Only apply in normal mode and when no popup is active
+nnoremap <C-j> <C-e>
+nnoremap <C-k> <C-y>
+
 
 "-------------------------------------------------------------------------------
 " Appearance, window, format, ...
@@ -127,20 +132,20 @@ nnoremap <Leader>w- :vertical resize -5<CR>
 " conflict-marker.vim default mappings
 "
 " Normal mode (when cursor is inside a conflict block):
-"   co   ‚Üí choose ours      (keep current branch, delete theirs + markers)
-"   ct   ‚Üí choose theirs    (keep incoming branch, delete ours + markers)
-"   cb   ‚Üí choose both      (keep ours + theirs, delete markers)
-"   cB   ‚Üí choose both (ours first)
-"   cn   ‚Üí choose none      (delete everything, leave empty block)
+"   co   → choose ours      (keep current branch, delete theirs + markers)
+"   ct   → choose theirs    (keep incoming branch, delete ours + markers)
+"   cb   → choose both      (keep ours + theirs, delete markers)
+"   cB   → choose both (ours first)
+"   cn   → choose none      (delete everything, leave empty block)
 "
 " Text objects (for operators like d, y, v):
-"   ic   ‚Üí inner conflict   (just the conflicting lines)
-"   ac   ‚Üí a conflict       (whole block including markers)
+"   ic   → inner conflict   (just the conflicting lines)
+"   ac   → a conflict       (whole block including markers)
 "
 " Example: `vic` selects the inner conflict, `dac` deletes the whole block.
 "-------------------------------------------------------------------------------
 
-" Don‚Äôt use default Diff* highlight groups
+" Don’t use default Diff* highlight groups
 let g:conflict_marker_highlight_group = ''
 
 let g:conflict_marker_begin = '^<<<<<<<\+ .*$'
@@ -362,6 +367,7 @@ if (has('nvim-0.4.0') || has('patch-8.2.0750')) && exists('*coc#float#has_scroll
         \ : "\<C-o>\<C-y>"
 
 endif
+
 
 " Use CTRL-S for selections ranges
 " Requires 'textDocument/selectionRange' support of language server
